@@ -18,6 +18,7 @@ public class MessagePublisher {
         this.properties = properties;
     }
 
+//    publish api
     @PostMapping("/send")
     public void sendMessage(@RequestBody MyMessage myMessage) {
         rabbitTemplate.convertAndSend(properties.getDemoExchange(), myMessage.routingKey, myMessage.payload);
