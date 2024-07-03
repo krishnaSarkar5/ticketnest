@@ -1,0 +1,19 @@
+services:
+  location-service:
+    image: krishnasarkar/ticketnest-location-service
+    container_name: location-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_URL=jdbc:postgresql://location-db:5432/postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    depends_on:
+      location-db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
